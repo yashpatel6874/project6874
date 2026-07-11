@@ -1,0 +1,58 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Install') {
+            steps {
+                bat 'npm install'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                bat 'npm test'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                bat ...
+                if exist dist rmdir /S /Q dist
+                mkdir dist
+                xcopy index.html dist\\ /Y
+                xcopy css dist\\css\\ /E /Y
+                xcopy js dist\\js\\ /E /Y
+                bat 'npm run build'
+                ...
+            }
+        }
+
+        stage('Deploy Dev') {
+            steps {
+                bat 'xcopy dist C:\\deployments\\development\\ /E /Y'
+            }
+        }
+
+        stage('Deploy Staging') {
+            steps {
+                bat 'xcopy dist C:\\deployments\\staging\\ /E /Y'
+            }
+        }
+
+        stage('Deploy Production') {
+            when {
+                branch 'main'
+            }
+            steps {
+                bat 'xcopy dist C:\\deployments\\production\\ /E /Y'
+            }
+        }
+    }
+}

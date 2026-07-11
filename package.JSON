@@ -1,0 +1,12 @@
+{
+  "name": "jenkins-demo",
+  "version": "1.0.0",
+  "description": "Mini Jenkins CI/CD Demo Project",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo Running Tests... && exit 0",
+    "build": "echo Building Project..."
+  },
+  "author": "Yash Patel",
+  "license": "MIT"
+}
