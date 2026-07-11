@@ -23,13 +23,12 @@ pipeline {
 
         stage('Build') {
             steps {
-                bat ...
+                bat
                 if exist dist rmdir /S /Q dist
                 mkdir dist
                 xcopy index.html dist\\ /Y
                 xcopy css dist\\css\\ /E /Y
                 xcopy js dist\\js\\ /E /Y
-                ...
             }
         }
 
